@@ -75,3 +75,13 @@ jobs:
           credentials: ${{ secrets.GCP_SA_KEY }}
       - name: was-deploy restart
         run: kubectl rollout restart deployment/was
+        
+      - name: war-backup
+        uses: convictional/gcp-storage-action@master
+        with:
+          source_file: ./Dockerfile/*.war
+          destination_file: gs://ksdehdgus/v1.war
+          application_credentials: ${{ secrets.GCP_AUTH }}
+          project_id: active-sun-343109
+        
+      
