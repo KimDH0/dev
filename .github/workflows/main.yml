@@ -83,5 +83,3 @@ jobs:
           destination_file: gs://ksdehdgus/v1.war
           application_credentials: ${{ secrets.GCP_AUTH }}
           project_id: active-sun-343109
-        
-      
