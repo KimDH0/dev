@@ -56,6 +56,9 @@ jobs:
           cp ./build/libs/*.war ./Dockerfile
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/m-dev:tomcat_latest ./Dockerfile
           docker images
+      
+      - name: build number
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/m-dev:tomcat_$GITHUB_RUN_NUMBER
               
       - name: Login to Docker Hub
         uses: docker/login-action@v1
