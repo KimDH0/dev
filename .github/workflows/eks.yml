@@ -65,9 +65,15 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
-        
-      - name: eks connect
-        run: aws eks --region us-west-1 update-kubeconfig --name kim1
+      
+      - name: EKS-vended Kubernetes (k8s) kubectl
+        uses: Eyevinn/action-eks-kubectl@v1.0.1
+        with:
+          REGION: us-west-1
+          CLUSTER: kim1
+      
+      #- name: eks connect
+      #  run: aws eks --region us-west-1 update-kubeconfig --name kim1
       
       - name: Copy files to the test website with the AWS CLI
         run: aws s3 sync ./build/libs s3://kimkim/${{ github.run_number }}
