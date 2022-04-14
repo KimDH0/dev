@@ -66,16 +66,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
         
-      - name: EKS kubectl
-        uses: ianbelcher/eks-kubectl-action@1.5
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: us-west-1
-          cluster_name: kim1  
-        
-      #- name: eks connect
-      #  run: aws eks --region us-west-1 update-kubeconfig --name kim1
+      - name: eks connect
+        run: aws eks --region us-west-1 update-kubeconfig --name kim1
       
       - name: Copy files to the test website with the AWS CLI
         run: aws s3 sync ./build/libs s3://kimkim/${{ github.run_number }}
