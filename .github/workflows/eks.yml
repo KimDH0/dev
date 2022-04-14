@@ -74,13 +74,15 @@ jobs:
           aws_region: ${{ secrets.AWS_REGION }}
           cluster_name: ${{ secrets.CLUSTER_NAME }}
         with:
-          args: kubectl rollout restart deployment/was
+          args: | 
+            kubectl rollout restart deployment/was
+            aws s3 sync ./build/libs s3://kimkim/${{ github.run_number }}
                 
       #- name: eks connect
       #  run: aws eks --region us-west-1 update-kubeconfig --name kim1
       
-      - name: Copy files to the test website with the AWS CLI
-        run: aws s3 sync ./build/libs s3://kimkim/${{ github.run_number }}
+      #- name: Copy files to the test website with the AWS CLI
+      #  run: aws s3 sync ./build/libs s3://kimkim/${{ github.run_number }}
 
       #- name: was-deploy restart
       #  run: kubectl rollout restart deployment/was
